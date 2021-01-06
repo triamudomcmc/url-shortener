@@ -1,5 +1,5 @@
 import admin from 'firebase-admin'
-import firebaseCert from '../private/key/tucmc-298007-bfb5b388045a.json'
+import firebaseCert from '../config/firebaseCert'
 
 const initialiseDB = () => {
     try {
