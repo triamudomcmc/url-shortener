@@ -16,13 +16,13 @@ export const URLgen = async (urlInput: string) => {
             targetDoc = await db.doc(randomId).get()
         }
         await db.doc(randomId).set({target: urlInput})
-        output.shortURL = `https://r.tucm.cc/${randomId}`
+        output.shortURL = `https://tucm.cc/${randomId}`
         output.status = 'success'
         return output
 
     }else{
         // pull existed record
-        output.shortURL = `https://r.tucm.cc/${validity.docs[0].id}`
+        output.shortURL = `https://tucm.cc/${validity.docs[0].id}`
         output.status = 'success'
         return output
     }
