@@ -15,7 +15,8 @@ export const getStaticProps: GetStaticProps = async (context) => {
   }
 
   return {
-    props: {data: item}
+    props: {data: item},
+    revalidate: 10
   }
 
 }
@@ -50,7 +51,7 @@ const links = ({ data }) => {
 
   return (
     <div className="flex flex-col items-center justify-center w-full h-screen mid-complex-gradient">
-      <div className="mt-10 w-4/5 h-4/5 max-w-md custom-max-h md:max-h-full">
+      <div className="mt-4 md:mt-10 w-4/5 h-4/5 max-w-md custom-max-h md:max-h-full">
         <img className="absolute w-72 md:w-auto" src="./vectors/bg.svg"/>
         <div className="flex flex-col item-center round-lg w-full h-full glass-panel rounded-3xl">
           <div className="mt-12 md:mt-16 mx-6 md:mx-10">
