@@ -58,7 +58,7 @@ const links = ({ data }) => {
             <h1 className="text-center text-purple-600 font-extrabold text-3xl md:text-4xl">TUCMC Links</h1>
             <p className="mt-8 md:mt-12 text-center font-semibold text-xs md:text-base text-gray-500">Discover all the
               links provided by us here :) and feel free to check them out!</p>
-            <div className="w-full overflow-y-auto h-3/5 mt-8 md:mt-14 font-semibold text-xs md:text-base font-display text-gray-700">
+            <div className="w-full overflow-y-auto h-80 md:h-3/5 mt-8 md:mt-14 font-semibold text-xs md:text-base font-display text-gray-700">
               {content}
             </div>
           </div>
