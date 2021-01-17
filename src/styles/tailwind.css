@@ -20,6 +20,10 @@
         backdrop-filter: blur(4px);
         box-shadow: #FFFFFF 0px -1px 0px 1px;
     }
+    .overflow-custom {
+        overflow: scroll;
+        -webkit-overflow-scrolling: touch;
+    }
     @responsive {
         .custom-max-h {
             max-height: 600px;

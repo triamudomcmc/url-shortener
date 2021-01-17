@@ -50,22 +50,22 @@ const links = ({ data }) => {
   },[data])
 
   return (
-    <div className="flex flex-col items-center justify-center w-full h-screen mid-complex-gradient">
-      <div className="mt-4 md:mt-10 w-4/5 h-4/5 max-w-md custom-max-h md:max-h-full">
-        <img className="absolute w-72 md:w-auto" src="./vectors/bg.svg"/>
-        <div className="flex flex-col item-center round-lg w-full h-full glass-panel rounded-3xl">
-          <div className="mt-12 md:mt-16 mx-6 md:mx-10">
-            <h1 className="text-center text-purple-600 font-extrabold text-3xl md:text-4xl">TUCMC Links</h1>
-            <p className="mt-8 md:mt-12 text-center font-semibold text-xs md:text-base text-gray-500">Discover all the
-              links provided by us here :) and feel free to check them out!</p>
-            <div className="w-full overflow-y-auto h-80 md:h-3/5 mt-8 md:mt-14 font-semibold text-xs md:text-base font-display text-gray-700">
-              {content}
+    <div className="flex flex-col items-center justify-center w-full h-full min-h-screen mid-complex-gradient">
+        <div className="flex mt-4 md:mt-10 w-4/5 h-4/5 max-w-md custom-max-h md:max-h-full">
+          <img className="absolute w-72 md:w-auto" src="./vectors/bg.svg"/>
+          <div className="flex flex-col item-center round-lg w-full glass-panel rounded-3xl">
+            <div className="mt-12 md:mt-16 mx-6 h-full md:mx-10">
+              <h1 className="text-center text-purple-600 font-extrabold text-3xl md:text-4xl">TUCMC Links</h1>
+              <p className="mt-8 md:mt-12 text-center font-semibold text-xs md:text-base text-gray-500">Discover all the
+                links provided by us here :) and feel free to check them out!</p>
+              <div className="w-full overflow-custom h-3/5 md:h-3/5 mt-2 pb-8 md:mt-14 font-semibold text-xs md:text-base font-display text-gray-700">
+                {content}
+              </div>
             </div>
           </div>
         </div>
+        <img className="mt-10 md:mt-8 mb-8 z-10" src="./vectors/TUCMC.svg"/>
       </div>
-      <img className="mt-10 md:mt-8 mb-8" src="./vectors/TUCMC.svg"/>
-    </div>
   )
 }
 
