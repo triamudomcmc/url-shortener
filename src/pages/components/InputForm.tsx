@@ -44,24 +44,24 @@ const InputForm = () => {
     }
 
     return (
-        <div className='md:w-7/12 relative w-11/12'>
-            <label className=''>
-                <input
-                    className="block text-2xl md:text-3xl pl-4 pr-36 border-gray-300 rounded-md shadow-sm w-full h-16 focus:ring-pink-500 focus:border-pink-500 border"
-                    type="text" value={url} onChange={(event) => {
-                        setUrl(event.target.value)
-                        checkvalue(event.target.value)
-                    }}
-                    placeholder='https://example.com'
-                />
-            </label>
-            <div className='absolute inset-y-0 right-5 flex items-center'>
-                <button
-                    className={`${bgclass} inline-flex items-center text-xl px-4 py-2 text-base font-medium text-white border border-transparent rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500`}
-                    type="submit" onClick={handleSubmit} disabled={!disable}>Shrink
-                </button>
-            </div>
-        </div>
+      <div className='md:w-7/12 relative w-11/12'>
+          <label className=''>
+              <input
+                className="block text-2xl md:text-3xl pl-4 pr-36 border-gray-300 rounded-md shadow-sm w-full h-16 focus:ring-pink-500 focus:border-pink-500 border"
+                type="text" value={url} onChange={(event) => {
+                  setUrl(event.target.value)
+                  checkvalue(event.target.value)
+              }}
+                placeholder='https://example.com'
+              />
+          </label>
+          <div className='absolute inset-y-0 right-5 flex items-center'>
+              <button
+                className={`${bgclass} inline-flex items-center text-xl px-4 py-2 text-base font-medium text-white border border-transparent rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500`}
+                type="submit" onClick={handleSubmit} disabled={!disable}>Shrink
+              </button>
+          </div>
+      </div>
     )
 }
 
