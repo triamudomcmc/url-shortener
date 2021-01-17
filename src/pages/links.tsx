@@ -55,7 +55,7 @@ const links = ({ data }) => {
           <img className="absolute w-72 md:w-auto" src="./vectors/bg.svg"/>
           <div className="flex flex-col item-center round-lg w-full glass-panel rounded-3xl">
             <div className="mt-12 md:mt-16 mx-6 h-full md:mx-10">
-              <h1 className="text-center text-purple-600 font-extrabold text-3xl md:text-4xl">TUCMC Links</h1>
+              <h1 className="text-center text-purple-400 font-extrabold text-3xl md:text-4xl">TUCMC Links</h1>
               <p className="mt-8 md:mt-12 text-center font-semibold text-xs md:text-base text-gray-500">Discover all the
                 links provided by us here :) and feel free to check them out!</p>
               <div className="w-full overflow-custom h-3/5 md:h-3/5 mt-2 pb-8 md:mt-14 font-semibold text-xs md:text-base font-display text-gray-700">
