@@ -24,6 +24,9 @@
         overflow: scroll;
         -webkit-overflow-scrolling: touch;
     }
+    .custom-min-h {
+        min-height: 500px;
+    }
     @responsive {
         .custom-max-h {
             max-height: 600px;
