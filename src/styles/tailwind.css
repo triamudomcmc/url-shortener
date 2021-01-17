@@ -31,5 +31,8 @@
         .custom-max-h {
             max-height: 600px;
         }
+        .custom-max-w {
+            max-width: 235px;
+        }
     }
 }
