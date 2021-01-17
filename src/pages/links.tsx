@@ -16,7 +16,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
   return {
     props: {data: item},
-    revalidate: 60
+    revalidate: 1
   }
 
 }
