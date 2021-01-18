@@ -78,7 +78,7 @@ const links = ({ data }) => {
               <div className="mt-4 md:mt-6 border-b-2 border-purple-625 w-2/5">
 
               </div>
-              <div className="w-full overflow-custom h-2/5 md:h-2/4 mt-4 pb-12 md:mt-6 font-semibold text-xs md:text-base font-display text-purple-625">
+              <div className="w-full overflow-custom h-2/5 md:h-2/4 mt-4 pb-10 md:mt-6 font-semibold text-xs md:text-base font-display text-purple-625">
                 {content}
               </div>
             </div>
