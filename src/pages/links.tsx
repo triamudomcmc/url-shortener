@@ -71,7 +71,7 @@ const links = ({ data }) => {
           <img className="absolute w-72 md:w-auto" src="./vectors/bg.svg"/>
           <div className="flex flex-col item-center round-lg w-full glass-panel rounded-3xl">
             <div className="flex flex-col items-center mt-8 md:mt-12 mx-6 h-full md:mx-10">
-              <img className="w-4/6 custom-max-w" src="./vectors/tableTab.svg"/>
+              <img className="w-4/6 custom-max-w" src="./vectors/timeTab.png"/>
               <h1 className="mt-3 md:mt-6 text-center text-purple-600 font-extrabold text-2xl md:text-3xl">TUCMC Links</h1>
               <p className="text-center font-medium text-xs md:text-base text-purple-600">Discover all the
                 links provided by us here :) and feel free to check them out!</p>
@@ -84,7 +84,7 @@ const links = ({ data }) => {
             </div>
           </div>
         </div>
-        <img className="mt-10 md:mt-8 mb-8 z-10 w-44 md:w-72" src="./vectors/TUCMC.svg"/>
+        <img className="mt-10 md:mt-8 mb-8 z-10 w-44 md:w-64" src="./vectors/TUCMC.png"/>
       </div>
   )
 }
