@@ -66,7 +66,7 @@ const links = ({ data }) => {
   },[data])
 
   return (
-    <div className="flex flex-col items-center w-full h-full min-h-screen mid-complex-gradient">
+    <div className="flex flex-col items-center w-full h-full min-h-screen mid-complex-gradient font-display">
         <div className="flex mt-14 md:mt-28 w-4/5 h-4/5 custom-min-h max-w-md custom-max-h md:max-h-full">
           <img className="absolute w-72 md:w-auto" src="./vectors/bg.svg"/>
           <div className="flex flex-col item-center round-lg w-full glass-panel rounded-3xl">
