@@ -8,7 +8,7 @@ const InputForm = () => {
     const [bgclass, setBg] = useState("bg-gray-400")
 
     const checkvalue = (value:string) => {
-        if (value.includes("r.tucm.cc") || !(value.includes("http://") || value.includes("https://"))) {
+        if (value.includes("tucm.cc") || !(value.includes("http://") || value.includes("https://"))) {
             setDisable(false)
             setBg("bg-gray-400")
         }else{
