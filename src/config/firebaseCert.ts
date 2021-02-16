@@ -8,7 +8,7 @@ const firebaseCert = () => {
         type: process.env.FCERT_TYPE,
         projectId: process.env.FCERT_PROJECT_ID,
         private_key_id: process.env.FCERT_PRIVATE_KEY_ID,
-        private_key: process.env.FCERT_PRIVATE_KEY,
+        private_key: process.env.FCERT_PRIVATE_KEY.replace(/\n/g,""),
         client_email: process.env.FCERT_CLIENT_EMAIL,
         client_id: process.env.FCERT_CLIENT_ID,
         auth_uri: process.env.FCERT_AUTH_URI,
