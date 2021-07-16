@@ -16,7 +16,14 @@ export const URLgen = async (urlInput: string) => {
                 randomId = cryptoRandomString({length: 4,type: "alphanumeric"})
                 targetDoc = await db.doc(randomId).get()
             }
-            await db.doc(randomId).set({target: urlInput})
+
+            const urlT = await fetch(urlInput)
+            const body = await urlT.text()
+            let title = body.split('<title>')[1].split('</title>')[0]
+
+            title = title.replace(/&lt;/g, "<").replace(/&gt;/g, ">")
+
+            await db.doc(randomId).set({target: urlInput, title: title})
             output.shortURL = `https://tucm.cc/${randomId}`
             output.status = 'success'
             return output

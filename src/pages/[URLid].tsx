@@ -13,14 +13,17 @@ export const getServerSideProps: GetServerSideProps = async ({ params}) => {
         URLtarget = "error"
     }
     return {
-        props: {target: URLtarget}
+        props: {target: URLtarget, title: URLbase.get("title") || null}
     }
 }
 
-const Page = ({ target }) => {
+const Page = ({ target, title }) => {
     React.useEffect(() => {
         if (target !== "error") {
-            Router.push(target)
+            // Router.push(target)
+        }
+        if (title) {
+            document.title = title
         }
     })
     if (target !== "error") {
