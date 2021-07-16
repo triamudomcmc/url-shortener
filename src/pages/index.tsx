@@ -3,10 +3,6 @@ import InputForm from "./components/InputForm";
 
 const Index = () => {
 
-  useEffect(() => {
-    document.title = "URL Shortener"
-  })
-
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
       <div className="text-6xl font-bold font-display pb-8">

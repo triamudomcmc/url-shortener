@@ -6,6 +6,9 @@ import Head from "next/head";
 
 const UrlShortenerApp = ({Component, pageProps}: AppProps) => (
     <div className="antialiased">
+      <Head>
+        <title>URL Shortener</title>
+      </Head>
         <Component {...pageProps} />
     </div>
 )

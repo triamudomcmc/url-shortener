@@ -20,16 +20,14 @@ export const getServerSideProps: GetServerSideProps = async ({ params}) => {
 const Page = ({ target, title }) => {
     React.useEffect(() => {
         if (target !== "error") {
-            Router.push(target)
+            // Router.push(target)
         }
         if (title) {
             document.title = title
-        }else{
-            document.title = "URL Shortener"
         }
     })
     if (target !== "error") {
-        return (<p>Redirecting..</p>)
+        return (<p>{title}</p>)
     }else{
         return (<p>Invalid link</p>)
     }
