@@ -21,7 +21,7 @@ export const getStaticProps: GetStaticProps = async ({ params}) => {
 
     return {
         props: {target: URLtarget, title: URLbase.get("title") || null},
-        revalidate: 2 * 60 * 60
+        revalidate: URLtarget == "error" ? 1 : 2 * 60 * 60
     }
 }
 
