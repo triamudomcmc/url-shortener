@@ -10,11 +10,10 @@ interface UserData {
 }
 
 interface IAuthContext {
-  onReady: ((callback: (logged: boolean, userData: UserData | null) => any) => any),
-  signin: () => void,
+  SigninWithTUCMC: () => JSX.Element,
   signout: () => void,
-  reFetch: (cause?: string) => Promise<void>,
-  isInit: boolean
+  reFetch: () => void,
+  userData: UserData | null
 }
 
 const AuthContext = React.createContext<IAuthContext | null>(null)
@@ -32,34 +31,84 @@ export const AuthProvider = ({children, token}) => {
 
 function useProvideAuth(token) {
 
-  const onReady = (callback: (logged: boolean, userData: UserData | null) => any) => {
-    if (userData !== null) return callback("studentID" in userData, userData)
-    return {logged: false, userData: null}
-  }
-
-  const [userData, setUserData] = useState(null)
   const [prevPop, setPrevPop] = useState(null)
-  const [isInit, setInit] = useState(true)
+  const [userData, setUserData] = useState(null)
+  const [loading, setLoading] = useState(false)
 
-  const reFetch = async (cause: string = "") => {
+  const user = () => {
     const data = window.localStorage.getItem("data")
+
     if (data) {
       const parsed = JSON.parse(data)
-      setUserData(parsed.data)
+      return parsed.data
+    }else{
+      return null
     }
   }
 
-  const singoutAction = async () => {
-    window.localStorage.setItem("data","")
-    setUserData(null)
-    window.location.reload()
+  const reFetch = () => {
+    setUserData(user())
   }
+
+  const SigninWithTUCMC = () => {
+    return (
+      <button onClick={signin} style={{
+        backgroundImage: "linear-gradient(to right, #a78bfa, #ec4899, #ef4444)",
+        color: "rgba(255, 255, 255, 1)",
+        padding: loading ? "0.14rem 4.71rem" : "0.5rem 2rem",
+        fontWeight: 600,
+        borderRadius: "0.375rem",
+        fontSize: "0.875rem",
+        lineHeight: "1.25rem",
+        border: "none",
+      }}>{
+        loading ? <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink"
+                       style={{margin: "auto", shapeRendering: "auto",width: "40px", height: "32px"}} viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+          <circle cx="84" cy="50" r="10" fill="#ffffff">
+            <animate attributeName="r" repeatCount="indefinite" dur="0.7142857142857142s" calcMode="spline" keyTimes="0;1" values="10;0"
+                     keySplines="0 0.5 0.5 1" begin="0s"/>
+            <animate attributeName="fill" repeatCount="indefinite" dur="2.8571428571428568s" calcMode="discrete" keyTimes="0;0.25;0.5;0.75;1"
+                     values="#ffffff;#ffffff;#ffffff;#ffffff;#ffffff" begin="0s"/>
+          </circle>
+          <circle cx="16" cy="50" r="10" fill="#ffffff">
+            <animate attributeName="r" repeatCount="indefinite" dur="2.8571428571428568s" calcMode="spline" keyTimes="0;0.25;0.5;0.75;1"
+                     values="0;0;10;10;10" keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" begin="0s"/>
+            <animate attributeName="cx" repeatCount="indefinite" dur="2.8571428571428568s" calcMode="spline" keyTimes="0;0.25;0.5;0.75;1"
+                     values="16;16;16;50;84" keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" begin="0s"/>
+          </circle>
+          <circle cx="50" cy="50" r="10" fill="#ffffff">
+            <animate attributeName="r" repeatCount="indefinite" dur="2.8571428571428568s" calcMode="spline" keyTimes="0;0.25;0.5;0.75;1"
+                     values="0;0;10;10;10" keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" begin="-0.7142857142857142s"/>
+            <animate attributeName="cx" repeatCount="indefinite" dur="2.8571428571428568s" calcMode="spline" keyTimes="0;0.25;0.5;0.75;1"
+                     values="16;16;16;50;84" keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" begin="-0.7142857142857142s"/>
+          </circle>
+          <circle cx="84" cy="50" r="10" fill="#ffffff">
+            <animate attributeName="r" repeatCount="indefinite" dur="2.8571428571428568s" calcMode="spline" keyTimes="0;0.25;0.5;0.75;1"
+                     values="0;0;10;10;10" keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" begin="-1.4285714285714284s"/>
+            <animate attributeName="cx" repeatCount="indefinite" dur="2.8571428571428568s" calcMode="spline" keyTimes="0;0.25;0.5;0.75;1"
+                     values="16;16;16;50;84" keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" begin="-1.4285714285714284s"/>
+          </circle>
+          <circle cx="16" cy="50" r="10" fill="#ffffff">
+            <animate attributeName="r" repeatCount="indefinite" dur="2.8571428571428568s" calcMode="spline" keyTimes="0;0.25;0.5;0.75;1"
+                     values="0;0;10;10;10" keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" begin="-2.142857142857143s"/>
+            <animate attributeName="cx" repeatCount="indefinite" dur="2.8571428571428568s" calcMode="spline" keyTimes="0;0.25;0.5;0.75;1"
+                     values="16;16;16;50;84" keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" begin="-2.142857142857143s"/>
+          </circle>
+        </svg>: "Login with TUCMC"
+      }</button>
+    )
+  }
+
+  useEffect(() => {
+    reFetch()
+  }, [])
 
   const signout = () => {
-    singoutAction()
+    window.localStorage.setItem("data","")
+    reFetch()
   }
 
-  const update = async () => {
+  const fetchToken = async () => {
     const fp = await FingerprintJS.load()
     const fingerPrint = await fp.get();
 
@@ -82,16 +131,16 @@ function useProvideAuth(token) {
     if (jsonResult.status) {
       window.sessionStorage.setItem("authToken", "")
       window.localStorage.setItem("data", JSON.stringify(jsonResult.data.data))
-      window.location.reload()
+      reFetch()
     }
+    setLoading(false)
   }
-
 
   useEffect(() => {
     if (prevPop) {
       const inter = setInterval(() => {
         if (prevPop.closed) {
-          update()
+          fetchToken()
           clearInterval(inter)
         }
       }, 500)
@@ -115,14 +164,18 @@ function useProvideAuth(token) {
       credentials: 'include'
     })
 
-    const jsonResult = await res.json()
-    return jsonResult
+    return await res.json()
   }
 
   const signin = () => {
+    if (loading) return;
     if (prevPop) {
       prevPop.close()
     }
+    const data = window.localStorage.getItem("data")
+    if(data) return
+    setLoading(true)
+
     const wid = window.open("about:blank","_blank", "width=492,height=740")
     setPrevPop(wid)
 
@@ -134,18 +187,10 @@ function useProvideAuth(token) {
     })
   }
 
-  useEffect(() => {
-
-    reFetch()
-
-    setInit(false)
-  }, [])
-
   return {
-    onReady,
-    signin,
+    SigninWithTUCMC,
     signout,
     reFetch,
-    isInit
+    userData
   }
 }
