@@ -124,8 +124,14 @@ function useProvideAuth(token) {
 
     if(jsonResult.status) {
       setAuthToken(jsonResult.data.authToken)
-      const wid = window.open(`https://account.triamudom.club/auth?authToken=${jsonResult.data.authToken}`, "Login with TUCMC Account", "width=492,height=740")
-      setPrevPop(wid)
+      const button = document.createElement("button")
+      button.onclick = () => {
+        const wid = window.open(`https://account.triamudom.club/auth?authToken=${jsonResult.data.authToken}`, "Login with TUCMC Account", "width=492,height=740")
+        setPrevPop(wid)
+      }
+      document.body.appendChild(button)
+      button.click()
+      button.remove()
     }
   }
 
