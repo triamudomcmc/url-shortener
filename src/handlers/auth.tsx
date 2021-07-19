@@ -39,7 +39,6 @@ function useProvideAuth(token) {
 
   const [userData, setUserData] = useState(null)
   const [prevPop, setPrevPop] = useState(null)
-  const [authToken, setAuthToken] = useState(null)
   const [isInit, setInit] = useState(true)
 
   const reFetch = async (cause: string = "") => {
@@ -71,7 +70,7 @@ function useProvideAuth(token) {
       },
       body: JSON.stringify({
         action: "fetchAuthToken",
-        authToken: authToken,
+        authToken: window.sessionStorage.getItem("authToken"),
         reqToken: token,
         fp: fingerPrint.visitorId
       }),
@@ -81,6 +80,7 @@ function useProvideAuth(token) {
     const jsonResult = await res.json()
 
     if (jsonResult.status) {
+      window.sessionStorage.setItem("authToken", "")
       window.localStorage.setItem("data", JSON.stringify(jsonResult.data.data))
       window.location.reload()
     }
@@ -128,7 +128,7 @@ function useProvideAuth(token) {
 
     genToken().then(jsonResult => {
       if(jsonResult.status) {
-        setAuthToken(jsonResult.data.authToken)
+        window.sessionStorage.setItem("authToken", jsonResult.data.authToken)
         wid.location.replace(`https://account.triamudom.club/auth?authToken=${jsonResult.data.authToken}`)
       }
     })
