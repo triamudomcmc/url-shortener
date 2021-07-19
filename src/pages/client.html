@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+    <link rel="stylesheet" href="../handlers/TUCMC-auth.css"/>
+    <script type="text/javascript" src="../handlers/auth-lib.js"></script>
+    <script async src="//cdn.jsdelivr.net/npm/@fingerprintjs/fingerprintjs@3/dist/fp.min.js" onload="init()"></script>
+    <script>
+        const auth = new TUCMCAuth("thXDDst3qrnYCjVIB1ayPaalOVbiNaiHSl4BN6av56AjzZB")
+
+        window.onload = function () {
+            const sessionData = auth.user()
+            if (sessionData) {
+                document.getElementById("email").innerText = sessionData.email
+            }
+        }
+    </script>
+</head>
+<body>
+<button id="login_with_TUCMC" class="login_with_TUCMC">
+    Login with TUCMC
+</button>
+<button onclick="auth.signout()">logout</button>
+<p id="email"></p>
+</body>
+</html>
