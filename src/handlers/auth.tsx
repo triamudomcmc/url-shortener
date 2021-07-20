@@ -176,7 +176,7 @@ function useProvideAuth(token) {
     if(data) return
     setLoading(true)
 
-    const wid = window.open("about:blank","_blank", "width=492,height=740")
+    const wid = window.open("https://account.triamudom.club/auth","_blank", "width=492,height=740")
     setPrevPop(wid)
 
     genToken().then(jsonResult => {
