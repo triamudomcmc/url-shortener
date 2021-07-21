@@ -1,0 +1,75 @@
+import initialisedDB from "../../../handlers/firebase-admin";
+import objectArray from "../../../types/objectArray";
+import {NextApiRequest} from "next";
+import hash from "object-hash"
+import Cookies from "cookies"
+import FingerprintJS from "@fingerprintjs/fingerprintjs";
+
+export const fetchPage = async (req: NextApiRequest) => {
+
+  const db = await initialisedDB.collection("userPages").doc(req.body.id).get()
+  if (!db.exists) return {status: false}
+
+  if (req.body.localCacheVersion !== "") {
+    if (db.get("cache_version") === req.body.localCacheVersion) return {status: true, data: {}}
+  }
+
+  return {status: true, data: db.data()}
+
+}
+
+export const updatePage = async (req: NextApiRequest) => {
+
+  const pageHash = hash({...req.body.pageData, cache_version: ""})
+  await initialisedDB.collection("userPages").doc(req.body.id).set({...req.body.pageData, cache_version: pageHash})
+
+  return {status: true}
+
+}
+
+export const validateToken = async (req: NextApiRequest) => {
+  const {authToken, fp, reqToken} = req.body
+
+  if (!authToken) return {status: false}
+
+  console.log(req.body)
+
+  const res = await fetch(`https://account.triamudom.club/api/token`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      action: "fetchAuthToken",
+      authToken: authToken,
+      reqToken: reqToken,
+      fp: fp
+    }),
+    credentials: 'include'
+  })
+
+  const jsonResult = await res.json()
+  const userData = jsonResult.data.data
+
+  const cookies = new Cookies(req, res, {keys: [process.env.COOKIE_KEY]})
+  const url = await initialisedDB.collection("users").doc(userData.studentID).get()
+
+  const sess = await initialisedDB.collection("session").add({
+    page: url.get("page")
+  })
+
+  const expires = new Date().getTime() + (2 * 60 * 60 * 1000)
+
+  cookies.set('sessionID', sess.id, {
+    httpOnly: true,
+    sameSite: 'Strict',
+    signed: true,
+    expires: new Date(expires)
+  })
+
+  if (jsonResult.status) {
+    return {status: true, data: JSON.stringify(jsonResult.data.data)}
+  }else{
+    return {status: false, data: {}}
+  }
+}

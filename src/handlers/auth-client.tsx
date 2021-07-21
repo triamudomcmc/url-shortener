@@ -112,13 +112,13 @@ function useProvideAuth(token) {
     const fp = await FingerprintJS.load()
     const fingerPrint = await fp.get();
 
-    const res = await fetch(`/api/table`, {
+    const res = await fetch(`https://account.triamudom.club/api/token`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        action: "validateToken",
+        action: "fetchAuthToken",
         authToken: window.sessionStorage.getItem("authToken"),
         reqToken: token,
         fp: fingerPrint.visitorId
@@ -130,7 +130,7 @@ function useProvideAuth(token) {
 
     if (jsonResult.status) {
       window.sessionStorage.setItem("authToken", "")
-      window.localStorage.setItem("data", JSON.stringify(jsonResult.data))
+      window.localStorage.setItem("data", JSON.stringify(jsonResult.data.data))
       reFetch()
     }
     setLoading(false)
