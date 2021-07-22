@@ -7,11 +7,18 @@ import FingerprintJS from "@fingerprintjs/fingerprintjs";
 
 export const fetchPage = async (req: NextApiRequest, res: NextApiResponse) => {
 
-  const cookies = new Cookies(req, res, {keys: [process.env.COOKIE_KEY]})
-  const sessionID = cookies.get("sessionID", {signed: true})
-  const sessionData = await initialisedDB.collection("session").doc(sessionID).get()
+  let db;
 
-  const db = await initialisedDB.collection("userPages").doc(sessionData.get("page")).get()
+  if (req.body.id) {
+    db = await initialisedDB.collection("userPages").doc(req.body.id).get()
+  }else{
+    const cookies = new Cookies(req, res, {keys: [process.env.COOKIE_KEY]})
+    const sessionID = cookies.get("sessionID", {signed: true})
+    const sessionData = await initialisedDB.collection("session").doc(sessionID).get()
+
+    db = await initialisedDB.collection("userPages").doc(sessionData.get("page")).get()
+  }
+
   if (!db.exists) return {status: false}
 
   if (req.body.localCacheVersion !== "") {
