@@ -62,6 +62,8 @@ export const validateToken = async (req: NextApiRequest, result: NextApiResponse
   })
 
   const jsonResult = await res.json()
+  if (!jsonResult.status) return {status: false}
+
   const userData = jsonResult.data.data
 
   const cookies = new Cookies(req, result, {keys: [process.env.COOKIE_KEY]})
