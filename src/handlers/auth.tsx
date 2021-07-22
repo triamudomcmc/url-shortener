@@ -13,7 +13,7 @@ interface IAuthContext {
   SigninWithTUCMC: () => JSX.Element,
   signout: () => void,
   reFetch: () => void,
-  userData: UserData | null
+  userData: UserData | null | undefined
 }
 
 const AuthContext = React.createContext<IAuthContext | null>(null)
@@ -35,19 +35,15 @@ function useProvideAuth(token) {
   const [userData, setUserData] = useState(null)
   const [loading, setLoading] = useState(false)
 
-  const user = () => {
-    const data = window.localStorage.getItem("data")
-
-    if (data) {
-      const parsed = JSON.parse(data)
-      return parsed.data
-    }else{
-      return null
-    }
-  }
 
   const reFetch = () => {
-    setUserData(user())
+    const data = window.localStorage.getItem("data")
+    if (data) {
+      const parsed = JSON.parse(data)
+      setUserData(parsed)
+    }else{
+      setUserData(undefined)
+    }
   }
 
   const SigninWithTUCMC = () => {
@@ -103,8 +99,18 @@ function useProvideAuth(token) {
     reFetch()
   }, [])
 
-  const signout = () => {
+  const signout = async () => {
     window.localStorage.setItem("data","")
+    await fetch(`/api/table`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        action: "destroyCookie"
+      }),
+      credentials: 'include'
+    })
     reFetch()
   }
 
@@ -160,8 +166,7 @@ function useProvideAuth(token) {
         action: "genAuthToken",
         reqToken: token,
         fp: fingerPrint.visitorId
-      }),
-      credentials: 'include'
+      })
     })
 
     return await res.json()
