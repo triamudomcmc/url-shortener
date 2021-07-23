@@ -21,7 +21,8 @@
         box-shadow: #FFFFFF 0px -1px 0px 1px;
     }
     .overflow-custom {
-        overflow: scroll;
+        overflow-x: hidden;
+        overflow-y: scroll;
         -webkit-overflow-scrolling: touch;
     }
     .custom-min-h {
