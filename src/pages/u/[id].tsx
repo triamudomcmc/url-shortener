@@ -7,7 +7,6 @@ import hash from "object-hash"
 
 const links = () => {
 
-  const [content, setContent] = useState(<></>)
   const initialPageData = {
     title: "",
     description: "",
@@ -54,42 +53,6 @@ const links = () => {
     fetchPageData()
   },[router.query])
 
-  useEffect(() => {
-    setContent((prev) => {
-      let rawData: JSX.Element = <></>
-      let margin = false
-      pageData.data.forEach((value) => {
-        if (margin) {
-          rawData =
-            <>
-              {rawData}
-              <div className="mt-6 content-panel w-full rounded-2xl md:rounded-3xl hover:bg-pink-50">
-                <Link href={value.link}>
-                  <div className="flex flex-col justify-center text-center h-14 md:h-16 my-1">
-                    <h1>{value.title}</h1>
-                  </div>
-                </Link>
-              </div>
-            </>
-        }else{
-          rawData =
-            <>
-              {rawData}
-              <div className="content-panel w-full rounded-2xl md:rounded-3xl hover:bg-pink-50">
-                <Link href={value.link}>
-                  <div className="flex flex-col justify-center text-center h-14 md:h-16 my-1">
-                    <h1>{value.title}</h1>
-                  </div>
-                </Link>
-              </div>
-            </>
-          margin = true
-        }
-      })
-      return rawData
-    })
-  },[pageData])
-
   return (
     <div className="flex flex-col items-center w-full h-full min-h-screen mid-complex-gradient">
       <div className="flex mt-14 md:mt-28 w-4/5 h-4/5 custom-min-h max-w-md custom-max-h md:max-h-full">
@@ -101,8 +64,18 @@ const links = () => {
             <div className="mt-4 md:mt-6 border-b-2 border-purple-625 w-2/5">
 
             </div>
-            <div className="px-1 w-full overflow-custom h-2/5 md:h-2/4 mt-4 pb-12 md:mt-6 font-semibold text-xs md:text-base font-display text-purple-625">
-              {content}
+            <div className="px-1 space-y-6 w-full overflow-custom h-2/5 md:h-2/4 mt-4 pb-12 md:mt-6 font-semibold text-xs md:text-base font-display text-purple-625">
+              {
+                pageData.data.map((value) => {
+                  return <div className="content-panel w-full rounded-2xl md:rounded-3xl hover:bg-pink-50">
+                    <Link href={value.link}>
+                      <div className="flex flex-col justify-center text-center h-14 md:h-16 my-1">
+                        <h1>{value.title}</h1>
+                      </div>
+                    </Link>
+                  </div>
+                })
+              }
             </div>
           </div>
         </div>
