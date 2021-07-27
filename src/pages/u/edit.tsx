@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {request} from "../../lib/request";
-import {PencilIcon} from "@heroicons/react/outline";
+import {PencilIcon, TrashIcon} from "@heroicons/react/outline";
 import {PlusIcon, XIcon} from "@heroicons/react/solid";
 import {motion} from "framer-motion";
 import hash from "object-hash"
@@ -31,24 +31,28 @@ const Edit = () => {
   const [pageData, setPageData] = useState(initialPageData)
 
   const fetchPageData = async () => {
-    const res = await request("table", "fetchPage", {localCacheVersion: ""})
+    const pageID = localStorage.getItem("editPage") || ""
+
+    const res = await request("table", "fetchPage", {localCacheVersion: "", id: pageID})
     if (res.status) {
       setPageData(res.data)
     }
   }
 
   useEffect(() => {
-    if(userData !== null) {
+    if (userData !== null) {
       if (userData !== undefined) {
         fetchPageData()
-      }else{
+      } else {
         Router.push("/u")
       }
     }
   }, [userData])
 
   const updateDatabase = async () => {
-    const res = await request("table", "updatePage", {pageData: pageData})
+    const pageID = localStorage.getItem("editPage") || ""
+
+    const res = await request("table", "updatePage", {pageData: pageData, id: pageID})
     if (res.status) {
       console.log("scuse")
     }
@@ -129,6 +133,19 @@ const Edit = () => {
     setEditing(true)
   }
 
+  const shiftElement = () => {
+
+    const conf = confirm("Are you sure?")
+    if (conf) {
+      setPageData(prevState => {
+        const newData = prevState.data.filter((item, index) => (index !== editData.index))
+
+        return {...prevState, data: newData}
+      })
+      setEditing(false)
+    }
+  }
+
   const clearEdit = () => {
     setEditing(false)
     setEditData({
@@ -139,6 +156,20 @@ const Edit = () => {
   }
 
   const updateList = async () => {
+    if (editData.index >= 998) {
+
+      switch (editData.index) {
+        case 998:
+          setPageData(prevState => ({...prevState, description: editData.title}))
+          break
+        case 999:
+          setPageData(prevState => ({...prevState, title: editData.title}))
+      }
+
+      setEditing(false)
+      return
+    }
+
     if (editData.index >= 0) {
       setPageData(prevState => {
         let newData = [...prevState.data]
@@ -157,21 +188,36 @@ const Edit = () => {
               <div
                   className="flex justify-between items-center py-3 px-4 bg-gray-50 bg-opacity-20 rounded-t-xl border-b border-gray-400 border-opacity-30">
                   <h1 className="font-medium text-gray-700">Edit current selection</h1>
-                  <XIcon onClick={clearEdit} className="w-4 h-4 text-gray-700"/>
+                  <div className="flex space-x-2 justify-between items-center">
+                    {editData.index < 998 && <TrashIcon onClick={shiftElement} className="w-4 h-4 text-gray-700"/>}
+                      <XIcon onClick={clearEdit} className="w-4 h-4 text-gray-700"/>
+                  </div>
               </div>
               <div className="px-6 pt-4 space-y-2 text-gray-700">
+                {editData.index < 998 ? <>
                   <div className="flex items-center space-x-2">
-                      <h1 className="font-medium">Title: </h1>
-                      <input onChange={e => {
-                        setEditData(prevState => ({...prevState, title: e.target.value}))
-                      }} value={editData.title} className="px-2 h-8 bg-white bg-opacity-30 rounded-md border border-white appearance-none"/>
+                    <h1 className="font-medium">Title: </h1>
+                    <input onChange={e => {
+                      setEditData(prevState => ({...prevState, title: e.target.value}))
+                    }} value={editData.title} className="px-2 h-8 bg-white bg-opacity-30 rounded-md border border-white appearance-none"/>
                   </div>
                   <div className="flex items-center space-x-2">
-                      <h1 className="font-medium">URL: </h1>
-                      <input onChange={e => {
-                        setEditData(prevState => ({...prevState, url: e.target.value}))
-                      }} value={editData.url} className="px-2 h-8 bg-white bg-opacity-30 rounded-md border border-white appearance-none"/>
+                    <h1 className="font-medium">URL: </h1>
+                    <input onChange={e => {
+                      setEditData(prevState => ({...prevState, url: e.target.value}))
+                    }} value={editData.url} className="px-2 h-8 bg-white bg-opacity-30 rounded-md border border-white appearance-none"/>
                   </div>
+                </> : editData.index > 998 ? <div className="flex items-center space-x-2">
+                  <h1 className="font-medium">Title: </h1>
+                  <input onChange={e => {
+                    setEditData(prevState => ({...prevState, title: e.target.value}))
+                  }} value={editData.title} className="px-2 h-8 bg-white bg-opacity-30 rounded-md border border-white appearance-none"/>
+                </div> : <div className="flex flex-col items-start space-y-2">
+                  <h1 className="font-medium">Description</h1>
+                  <textarea onChange={e => {
+                    setEditData(prevState => ({...prevState, title: e.target.value}))
+                  }} rows={6} value={editData.title} className="px-2 py-1 w-72 h-28 bg-white bg-opacity-30 rounded-md border border-white appearance-none"/>
+                </div>}
               </div>
               <div className="px-6 mt-4 mb-4">
                   <div onClick={updateList}
@@ -186,8 +232,16 @@ const Edit = () => {
         <div className="flex flex-col w-full rounded-3xl item-center round-lg glass-panel">
           <div className="flex flex-col items-center mx-6 mt-8 h-full md:mt-12 md:mx-10">
             <img className="w-4/6 custom-max-w" src="/vectors/timeTab.png"/>
-            <h1 className="mt-3 text-2xl font-extrabold text-center md:mt-6 text-purple-625 md:text-3xl">{pageData.title}</h1>
-            <p className="text-xs font-medium text-center md:text-base text-purple-625">{pageData.description}</p>
+            <div className="relative mt-3 md:mt-6">
+              <h1 className="text-2xl font-extrabold text-center text-purple-625 md:text-3xl">{pageData.title}</h1>
+              <PencilIcon onClick={() => {
+                edit(999, pageData.title, "")
+              }} className="top-3 -right-6 absolute w-3 h-3 text-blue-600 md:w-4 md:h-4"/>
+            </div>
+            <p className="text-xs font-medium text-center md:text-base text-purple-625">{pageData.description}<PencilIcon
+              onClick={() => {
+                edit(998, pageData.description, "")
+              }} className="inline absolute mt-1 ml-1 w-3 h-3 text-blue-600 md:w-4 md:h-4"/></p>
             <div className="mt-4 w-2/5 border-b-2 md:mt-6 border-purple-625">
 
             </div>

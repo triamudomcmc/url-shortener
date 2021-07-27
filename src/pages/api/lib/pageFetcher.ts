@@ -7,17 +7,7 @@ import FingerprintJS from "@fingerprintjs/fingerprintjs";
 
 export const fetchPage = async (req: NextApiRequest, res: NextApiResponse) => {
 
-  let db;
-
-  if (req.body.id) {
-    db = await initialisedDB.collection("userPages").doc(req.body.id).get()
-  }else{
-    const cookies = new Cookies(req, res, {keys: [process.env.COOKIE_KEY]})
-    const sessionID = cookies.get("sessionID", {signed: true})
-    const sessionData = await initialisedDB.collection("session").doc(sessionID).get()
-
-    db = await initialisedDB.collection("userPages").doc(sessionData.get("page")).get()
-  }
+  const db = await initialisedDB.collection("userPages").doc(req.body.id).get()
 
   if (!db.exists) return {status: false}
 
@@ -35,8 +25,9 @@ export const updatePage = async (req: NextApiRequest, res: NextApiResponse) => {
   const sessionID = cookies.get("sessionID", {signed: true})
   const sessionData = await initialisedDB.collection("session").doc(sessionID).get()
 
+  if (!sessionData.get("page").includes(req.body.id)) return {status: false}
   const pageHash = hash({...req.body.pageData, cache_version: ""})
-  await initialisedDB.collection("userPages").doc(sessionData.get("page")).set({...req.body.pageData, cache_version: pageHash})
+  await initialisedDB.collection("userPages").doc(req.body.id).set({...req.body.pageData, cache_version: pageHash})
 
   return {status: true}
 
@@ -90,7 +81,7 @@ export const validateToken = async (req: NextApiRequest, result: NextApiResponse
   })
 
   if (jsonResult.status) {
-    return {status: true, data: JSON.stringify(jsonResult.data.data)}
+    return {status: true, data: {...jsonResult.data.data, data: {...jsonResult.data.data.data, pages: url.get("page")}}}
   }else{
     return {status: false, data: {}}
   }

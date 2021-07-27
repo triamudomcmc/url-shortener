@@ -6,7 +6,8 @@ interface UserData {
   title: string,
   firstname: string,
   lastname: string,
-  email: string
+  email: string,
+  pages: Array<string>
 }
 
 interface IAuthContext {
@@ -37,10 +38,10 @@ function useProvideAuth(token) {
 
 
   const reFetch = () => {
-    const data = window.localStorage.getItem("data")
+    const data = localStorage.getItem("data")
     if (data) {
       const parsed = JSON.parse(data)
-      setUserData(parsed)
+      setUserData(parsed.data)
     }else{
       setUserData(undefined)
     }
@@ -137,6 +138,7 @@ function useProvideAuth(token) {
     if (jsonResult.status) {
       window.sessionStorage.setItem("authToken", "")
       window.localStorage.setItem("data", JSON.stringify(jsonResult.data))
+      window.localStorage.setItem("editPage", jsonResult.data.data.pages[0])
       reFetch()
     }
     setLoading(false)

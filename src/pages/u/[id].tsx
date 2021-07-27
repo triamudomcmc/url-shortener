@@ -22,7 +22,6 @@ const links = () => {
   const fetchPageData = async () => {
     const {id} = router.query
     if (id) {
-
       // load local cache
       const localCache = localStorage.getItem(`${id}_cache`)
       let localCacheVersion = null
@@ -44,8 +43,8 @@ const links = () => {
       const res = await request("table","fetchPage", {id: id, localCacheVersion: localCacheVersion || ""})
       if (res.status) {
         if (res.data.cache_version) {
-          setPageData(res.data)
           localStorage.setItem(`${id}_cache`, JSON.stringify(res.data))
+          setPageData(res.data)
         }
       }
     }
