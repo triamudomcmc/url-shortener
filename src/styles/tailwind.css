@@ -11,12 +11,12 @@
         background: linear-gradient(115.85deg, #E0BCF3 31.65%, #7EE7EE 94.47%);
     }
     .glass-panel {
-        background: linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%), rgba(255, 255, 255, 0.3);
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%), rgba(255, 255, 255, 0.2);
         backdrop-filter: blur(4px);
         box-shadow: #FFFFFF 0px -1px 0px 1px;
     }
     .content-panel {
-        background: linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%), rgba(255, 255, 255, 0.3);
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%), rgba(255, 255, 255, 0.2);
         backdrop-filter: blur(4px);
         box-shadow: #FFFFFF 0px -1px 0px 1px;
     }
