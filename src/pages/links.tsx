@@ -64,9 +64,6 @@ const links = () => {
 						<p className="text-center font-medium text-xs md:text-base text-purple-625">{pageData.description}</p>
 						<div className="mt-4 md:mt-6 border-b-2 border-purple-625 w-2/5"></div>
 						<div className="px-1 space-y-6 w-full overflow-custom h-2/5 md:h-2/4 mt-4 pb-12 md:mt-6 font-semibold text-xs md:text-base font-display text-purple-625">
-							<PageLink link="/" title="Test Title" />
-							<PageLink link="/" title="Sample Ipsum" />
-							<PageLink link="/" title="แจกตารางสอน !" />
 							{pageData.data.map((value) => {
 								return <PageLink link={value.link} title={value.title} />;
 							})}
