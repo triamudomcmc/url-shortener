@@ -22,7 +22,7 @@
     }
     .overflow-custom {
         overflow-x: hidden;
-        overflow-y: scroll;
+        overflow-y: hidden;
         -webkit-overflow-scrolling: touch;
     }
     .custom-min-h {

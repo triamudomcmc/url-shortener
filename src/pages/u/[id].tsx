@@ -4,6 +4,7 @@ import {GetStaticProps} from "next";
 import {request} from "../../lib/request";
 import {useRouter} from "next/router";
 import hash from "object-hash"
+import { PageLink } from "@components";
 
 const links = () => {
 
@@ -65,17 +66,9 @@ const links = () => {
 
             </div>
             <div className="px-1 space-y-6 w-full overflow-custom h-2/5 md:h-2/4 mt-4 pb-12 md:mt-6 font-semibold text-xs md:text-base font-display text-purple-625">
-              {
-                pageData.data.map((value) => {
-                  return <div className="content-panel w-full rounded-2xl md:rounded-3xl hover:bg-pink-50">
-                    <Link href={value.link}>
-                      <div className="flex flex-col justify-center text-center h-14 md:h-16 my-1">
-                        <h1>{value.title}</h1>
-                      </div>
-                    </Link>
-                  </div>
-                })
-              }
+              {pageData.data.map((value) => {
+								return <PageLink link={value.link} title={value.title} />;
+							})}
             </div>
           </div>
         </div>
