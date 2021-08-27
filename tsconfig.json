@@ -1,6 +1,10 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "target": "es5",
+    "paths": {
+      "@components": ["src/components/index.ts"],
+    },
     "lib": [
       "dom",
       "dom.iterable",
@@ -16,8 +20,7 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve",
-    "baseUrl": "./src"
+    "jsx": "preserve"
   },
   "include": [
     "next-env.d.ts",

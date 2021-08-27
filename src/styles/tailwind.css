@@ -23,7 +23,14 @@
     .overflow-custom {
         overflow-x: hidden;
         overflow-y: scroll;
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none;  /* Internet Explorer 10+ */
+        height: 100%;
         -webkit-overflow-scrolling: touch;
+    }
+    .overflow-custom::-webkit-scrollbar { /* WebKit */
+        width: 0;
+        height: 0;
     }
     .custom-min-h {
         min-height: 500px;
