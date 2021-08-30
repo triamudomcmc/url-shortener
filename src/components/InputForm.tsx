@@ -2,15 +2,15 @@ import React, { useState } from "react";
 
 const InputForm = () => {
 	const [url, setUrl] = useState("");
-	const [disable, setDisable] = useState(true);
-	const [bgclass, setBg] = useState("bg-gray-400");
+	const [disabled, setDisabled] = useState(true);
+	const [bgclass, setBg] = useState("bg-gray-400 cursor-not-allowed");
 
 	const checkvalue = (value: string) => {
 		if (value.includes("tucm.cc") || !(value.includes("http://") || value.includes("https://"))) {
-			setDisable(false);
-			setBg("bg-gray-400");
+			setDisabled(true);
+			setBg("bg-gray-400 cursor-not-allowed");
 		} else {
-			setDisable(true);
+			setDisabled(false);
 			setBg("bg-pink-400 hover:bg-pink-700");
 		}
 	};
@@ -32,8 +32,8 @@ const InputForm = () => {
 			const jsonResult = await res.json();
 			if (jsonResult.status === "success") {
 				setUrl(jsonResult.shortURL);
-				setDisable(false);
-				setBg("bg-gray-400");
+				setDisabled(true);
+				setBg("bg-gray-400 cursor-not-allowed");
 			}
 		} catch (error) {
 			console.log(error);
@@ -59,8 +59,8 @@ const InputForm = () => {
 					className={`${bgclass} inline-flex items-center px-4 py-2 text-base font-medium text-white border border-transparent rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500`}
 					type="submit"
 					onClick={handleSubmit}
-					disabled={!disable}
-					title="Shrink!"
+					disabled={disabled}
+					title={disabled ? "Enter a link first" : "Shrink!"}
 				>
 					Shrink
 				</button>
