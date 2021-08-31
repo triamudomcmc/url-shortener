@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {request} from "../../../lib/request";
 import {PencilIcon, TrashIcon} from "@heroicons/react/outline";
-import {PlusIcon, XIcon} from "@heroicons/react/solid";
+import {PlusIcon, XIcon, ArrowUpIcon, ArrowDownIcon} from "@heroicons/react/solid";
 import {motion} from "framer-motion";
 import hash from "object-hash"
 import {useAuth} from "../../../handlers/auth";
@@ -113,7 +113,14 @@ const Edit = () => {
     }
   }, [pageData])
 
-  const addLink = () => {
+  const addLinkAbove = () => {
+    setPageData(prevState => {
+      const newData = [{title: "untitled", link: ""}, ...prevState.data]
+      return {...prevState, data: newData}
+    })
+  }
+
+  const addLinkBelow = () => {
     setPageData(prevState => {
       const newData = [...prevState.data, {title: "untitled", link: ""}]
       return {...prevState, data: newData}
@@ -249,8 +256,12 @@ const Edit = () => {
               className="px-1 pb-5 mt-4 w-full h-2/5 text-xs font-semibold overflow-custom md:h-2/4 md:mt-6 md:text-base font-display text-purple-625">
               {content}
             </div>
-            <motion.div onClick={addLink} whileHover={{scale: 1.1}} className="py-3 px-3 mb-6 bg-white bg-opacity-50 rounded-full cursor-pointer">
-              <PlusIcon className="w-6 h-6 text-blue-600"/>
+
+            <motion.div onClick={addLinkAbove} whileHover={{scale: 1.1}} className="py-3 px-3 mb-6 bg-white bg-opacity-50 rounded-full cursor-pointer">
+              <ArrowUpIcon className="w-6 h-6 text-blue-600"/>
+            </motion.div>
+            <motion.div onClick={addLinkBelow} whileHover={{scale: 1.1}} className="py-3 px-3 mb-6 bg-white bg-opacity-50 rounded-full cursor-pointer">
+              <ArrowDownIcon className="w-6 h-6 text-blue-600"/>
             </motion.div>
           </div>
         </div>
