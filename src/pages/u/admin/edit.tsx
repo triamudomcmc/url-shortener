@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from "react";
-import {request} from "../../lib/request";
+import {request} from "../../../lib/request";
 import {PencilIcon, TrashIcon} from "@heroicons/react/outline";
 import {PlusIcon, XIcon} from "@heroicons/react/solid";
 import {motion} from "framer-motion";
 import hash from "object-hash"
-import {useAuth} from "../../handlers/auth";
+import {useAuth} from "../../../handlers/auth";
 import Router from "next/router";
 
 const Edit = () => {
