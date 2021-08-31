@@ -44,7 +44,7 @@ const Edit = () => {
       if (userData !== undefined) {
         fetchPageData()
       } else {
-        Router.push("/u")
+        Router.push("/u/admin")
       }
     }
   }, [userData])
