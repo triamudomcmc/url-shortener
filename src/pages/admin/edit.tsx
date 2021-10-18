@@ -11,7 +11,7 @@ const PageLinkEdit = ({ rawData, value, onClick }) => {
 	return (
 		<>
 			{rawData}
-			<div className="w-full rounded-2xl content-panel md:rounded-3xl">
+			<div className="mt-6 w-full rounded-2xl content-panel md:rounded-3xl">
 				<div className="flex flex-col justify-center my-1 h-14 text-center md:h-16">
 					<div className="relative mx-auto w-max px=10">
 						<span>{value.title}</span>
