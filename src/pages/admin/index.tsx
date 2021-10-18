@@ -1,4 +1,4 @@
-import {useAuth} from "../../../handlers/auth";
+import {useAuth} from "../../handlers/auth";
 import {useEffect, useState} from "react";
 import Router from "next/router";
 import classnames from "classnames";

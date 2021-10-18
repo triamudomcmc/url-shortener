@@ -1,11 +1,28 @@
 import React, { useEffect, useState } from "react";
-import { request } from "../../../lib/request";
+import { request } from "../../lib/request";
 import { PencilIcon, TrashIcon } from "@heroicons/react/outline";
 import { PlusIcon, XIcon } from "@heroicons/react/solid";
 import { motion } from "framer-motion";
 import hash from "object-hash";
-import { useAuth } from "../../../handlers/auth";
+import { useAuth } from "../../handlers/auth";
 import Router from "next/router";
+
+const PageLinkEdit = ({ rawData, value, onClick }) => {
+	return (
+		<>
+			{rawData}
+			<div className="w-full rounded-2xl content-panel md:rounded-3xl flex flex-col justify-center my-1 h-14 text-center md:h-16 px-10">
+				<span>{value.title}</span>
+				<span className="absolute top-0.5 md:top-1 -right-4 md:-right-6">
+					<PencilIcon
+						onClick={onClick}
+						className="w-3 h-3 text-blue-600 md:w-4 md:h-4"
+					/>
+				</span>
+			</div>
+		</>
+	);
+}
 
 const Edit = () => {
 	const [content, setContent] = useState(<></>);
@@ -64,45 +81,15 @@ const Edit = () => {
 			pageData.data.forEach((value, index) => {
 				if (margin) {
 					rawData = (
-						<>
-							{rawData}
-							<div className="mt-6 w-full rounded-2xl content-panel md:rounded-3xl">
-								<div className="flex flex-col justify-center my-1 h-14 text-center md:h-16">
-									<div className="relative mx-auto w-max">
-										<span>{value.title}</span>
-										<span className="absolute top-0.5 md:top-1 -right-4 md:-right-6">
-											<PencilIcon
-												onClick={() => {
-													edit(index, value.title, value.link);
-												}}
-												className="w-3 h-3 text-blue-600 md:w-4 md:h-4"
-											/>
-										</span>
-									</div>
-								</div>
-							</div>
-						</>
+						<PageLinkEdit rawData={rawData} value={value} onClick={() => {
+							edit(index, value.title, value.link);
+						}}/>
 					);
 				} else {
 					rawData = (
-						<>
-							{rawData}
-							<div className="w-full rounded-2xl content-panel md:rounded-3xl">
-								<div className="flex flex-col justify-center my-1 h-14 text-center md:h-16">
-									<div className="relative mx-auto w-max">
-										<span>{value.title}</span>
-										<span className="absolute top-0.5 md:top-1 -right-4 md:-right-6">
-											<PencilIcon
-												onClick={() => {
-													edit(index, value.title, value.link);
-												}}
-												className="w-3 h-3 text-blue-600 md:w-4 md:h-4"
-											/>
-										</span>
-									</div>
-								</div>
-							</div>
-						</>
+						<PageLinkEdit rawData={rawData} value={value} onClick={() => {
+							edit(index, value.title, value.link);
+						}}/>
 					);
 					margin = true;
 				}
