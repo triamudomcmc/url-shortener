@@ -78,7 +78,7 @@ const links = () => {
             <div className="px-1 space-y-6 w-full overflow-custom mt-4 pb-12 md:mt-6 font-semibold text-xs md:text-base font-display text-purple-625">
               <PageLink
                 link="https://schedule.tucm.cc/"
-                title="ตารางสอน 2/2021"
+                title="ตารางเรียน 2/2021"
               />
               <PageLink
                 link="https://loykratong.triamudom.club/"
