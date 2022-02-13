@@ -14,6 +14,12 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   let URLtarget: string;
 
   if (URLbase.exists) {
+    // @ts-ignore
+    window.gtag("event", "short_link_click", {
+      event_category: "short_link_click",
+      event_label: URLbase.get("title"),
+      link: URLbase.get("target"),
+    });
     URLtarget = URLbase.get("target");
   } else {
     URLtarget = "error";

@@ -62,6 +62,34 @@ const links = () => {
     <>
       <Head>
         <title>TUCMC's Links</title>
+
+        <meta name="title" content="TUCMC's Links" />
+        <meta
+          name="description"
+          content="Discover all the links provided by us here :) and feel free to check them out!"
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://tucm.cc/links/" />
+        <meta property="og:title" content="TUCMC's Links" />
+        <meta
+          property="og:description"
+          content="Discover all the links provided by us here :) and feel free to check them out!"
+        />
+        {/* <meta
+          property="og:image"
+          content="https://metatags.io/assets/meta-tags-16a33a6a8531e519cc0936fbba0ad904e52d35f34a46c97a2c9f6f7dd7d336f2.png"
+        /> */}
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content="https://tucm.cc/links/" />
+        <meta property="twitter:title" content="TUCMC's Links" />
+        <meta
+          property="twitter:description"
+          content="Discover all the links provided by us here :) and feel free to check them out!"
+        />
+        {/* <meta
+          property="twitter:image"
+          content="https://metatags.io/assets/meta-tags-16a33a6a8531e519cc0936fbba0ad904e52d35f34a46c97a2c9f6f7dd7d336f2.png"
+        /> */}
       </Head>
       <div className="flex flex-col items-center w-full h-full min-h-screen mid-complex-gradient">
         <div className="flex mt-14 md:mt-28 w-4/5 h-4/5 custom-min-h max-w-md custom-max-h md:max-h-full">
