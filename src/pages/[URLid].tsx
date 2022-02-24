@@ -1,5 +1,5 @@
 import Router, { useRouter } from "next/router";
-import React from "react";
+import React, { useEffect } from "react";
 import { GetServerSideProps, GetStaticPaths, GetStaticProps } from "next";
 import initialiseDB from "../handlers/firebase-admin";
 import Head from "next/head";
@@ -14,12 +14,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   let URLtarget: string;
 
   if (URLbase.exists) {
-    // @ts-ignore
-    window.gtag("event", "short_link_click", {
-      event_category: "short_link_click",
-      event_label: URLbase.get("title") || null,
-      link: URLbase.get("target"),
-    });
     URLtarget = URLbase.get("target");
   } else {
     URLtarget = "error";
@@ -34,9 +28,15 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 const Page = ({ target, title }) => {
   const router = useRouter();
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!router.isFallback) {
       if (target !== "error") {
+        // @ts-ignore
+        window.gtag("event", "short_link_click", {
+          event_category: "short_link_click",
+          event_label: title,
+          link: target,
+        });
         Router.push(target);
       }
       if (title) {
