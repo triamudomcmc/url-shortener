@@ -16,6 +16,6 @@ Links for every TUCMC project this year.
 
 ## Individual Links
 
-Links for anyone to be able to add.
+Your personal LinkTree.
 
 [Peter's Links](https://tucm.cc/u/peter)
