@@ -4,6 +4,8 @@ import { GetServerSideProps, GetStaticPaths, GetStaticProps } from "next";
 import initialiseDB from "../handlers/firebase-admin";
 import Head from "next/head";
 
+// trash
+
 export const getStaticPaths: GetStaticPaths = async () => {
   return { paths: [], fallback: true };
 };
