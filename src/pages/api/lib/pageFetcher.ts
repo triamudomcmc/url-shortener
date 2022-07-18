@@ -74,6 +74,8 @@ export const validateToken = async (
   const userData = jsonResult.data.data;
 
   const cookies = new Cookies(req, result, { keys: [process.env.COOKIE_KEY] });
+  console.log(jsonResult.data);
+
   const url = await initialisedDB
     .collection("users")
     .doc(userData.data.studentID)
