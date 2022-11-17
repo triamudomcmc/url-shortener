@@ -35,3 +35,5 @@ yarn-error.log*
 
 # Private
 src/private/key/tucmc-298007-bfb5b388045a.json
+
+.vault
