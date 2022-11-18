@@ -189,7 +189,7 @@ function useProvideAuth(token) {
     genToken().then(jsonResult => {
       if(jsonResult.status) {
         window.sessionStorage.setItem("authToken", jsonResult.data.authToken)
-        wid.location.replace(`https://account.triamudom.club/auth?authToken=${jsonResult.data.authToken}`)
+        wid.location.replace(`https://account.triamudom.club/auth?authToken=${jsonResult.data.authToken}&appId=${jsonResult.data.appId}`)
       }
     })
   }
