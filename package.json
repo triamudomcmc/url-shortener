@@ -25,7 +25,8 @@
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "sharp": "^0.30.5",
-    "tailwindcss": "^2.0.2"
+    "tailwindcss": "^2.0.2",
+    "tucmc-auth": "^0.4.0"
   },
   "devDependencies": {
     "@heroicons/react": "^1.0.2",

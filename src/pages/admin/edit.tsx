@@ -4,8 +4,8 @@ import { PencilIcon, TrashIcon } from "@heroicons/react/outline";
 import { PlusIcon, XIcon } from "@heroicons/react/solid";
 import { motion } from "framer-motion";
 import hash from "object-hash";
-import { useAuth } from "../../handlers/auth";
 import Router from "next/router";
+import {useAuth} from "tucmc-auth";
 
 const PageLinkEdit = ({ rawData, value, onClick }) => {
   return (
@@ -30,7 +30,7 @@ const PageLinkEdit = ({ rawData, value, onClick }) => {
 
 const Edit = () => {
   const [content, setContent] = useState(<></>);
-  const { userData } = useAuth();
+  const { loggedUser } = useAuth();
 
   const [editing, setEditing] = useState(false);
 
@@ -67,14 +67,14 @@ const Edit = () => {
   };
 
   useEffect(() => {
-    if (userData !== null) {
-      if (userData !== undefined) {
+    if (loggedUser !== null) {
+      if (loggedUser !== undefined) {
         fetchPageData();
       } else {
         Router.push("/u/admin");
       }
     }
-  }, [userData]);
+  }, [loggedUser]);
 
   const updateDatabase = async () => {
     const pageID = localStorage.getItem("editPage") || "";

@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import {destroyCookie, fetchPage, updatePage, validateToken} from "./lib/pageFetcher";
+import {destroyCookie, fetchPage, getPageList, updatePage, validateToken} from "./lib/pageFetcher";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { method } = req
@@ -16,7 +16,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         const output = await updatePage(req, res)
         res.json(output)
       }
-      if (req.body.action === "validateToken") {
+      if (req.body.action === "getPageList") {
+        const output = await getPageList(req, res)
+        res.json(output)
+      }
+      if (req.body.action === "fetchAuthToken") {
         const output = await validateToken(req, res)
         res.json(output)
       }

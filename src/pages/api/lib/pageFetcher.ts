@@ -4,6 +4,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import hash from "object-hash";
 import Cookies from "cookies";
 import FingerprintJS from "@fingerprintjs/fingerprintjs";
+import {LoggedUser, unpackToken} from "tucmc-auth";
 
 export const fetchPage = async (req: NextApiRequest, res: NextApiResponse) => {
   const db = await initialisedDB.collection("userPages").doc(req.body.id).get();
@@ -17,6 +18,17 @@ export const fetchPage = async (req: NextApiRequest, res: NextApiResponse) => {
 
   return { status: true, data: db.data() };
 };
+
+export const getPageList = async (req: NextApiRequest, res: NextApiResponse) => {
+  const cookies = new Cookies(req, res, { keys: [process.env.COOKIE_KEY] });
+  const sessionID = cookies.get("sessionID", { signed: true });
+  const sessionData = await initialisedDB
+      .collection("session")
+      .doc(sessionID)
+      .get()
+
+  return {status: true, data: {pages: sessionData.get("page")}}
+}
 
 export const updatePage = async (req: NextApiRequest, res: NextApiResponse) => {
   const cookies = new Cookies(req, res, { keys: [process.env.COOKIE_KEY] });
@@ -52,33 +64,18 @@ export const validateToken = async (
 ) => {
   const { authToken, fp, reqToken } = req.body;
 
-  if (!authToken) return { status: false };
+  if (!authToken) return { success: false };
 
-  const res = await fetch(`https://account.triamudom.club/api/token`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      action: "fetchAuthToken",
-      authToken: authToken,
-      reqToken: reqToken,
-      privateKey: process.env.API_KEY,
-      fp: fp,
-    }),
-  });
+  const unpackedToken = await unpackToken(req.body, process.env.API_KEY)
 
-  const jsonResult = await res.json();
-  if (!jsonResult.status) return { status: false };
+  if (!unpackedToken.success) {
+    return {success: false}
+  }
 
-  const userData = jsonResult.data.data;
-
-  const cookies = new Cookies(req, result, { keys: [process.env.COOKIE_KEY] });
-  console.log(jsonResult.data);
+  const userData: LoggedUser = unpackedToken.unpacked
 
   const url = await initialisedDB
-    .collection("users")
-    .doc(userData.data.studentID)
+    .collection("users").doc(userData.user.studentID)
     .get();
 
   const sess = await initialisedDB.collection("session").add({
@@ -87,6 +84,8 @@ export const validateToken = async (
 
   const expires = new Date().getTime() + 2 * 60 * 60 * 1000;
 
+  const cookies = new Cookies(req, result, { keys: [process.env.COOKIE_KEY] });
+
   cookies.set("sessionID", sess.id, {
     httpOnly: true,
     sameSite: "Strict",
@@ -94,15 +93,5 @@ export const validateToken = async (
     expires: new Date(expires),
   });
 
-  if (jsonResult.status) {
-    return {
-      status: true,
-      data: {
-        ...jsonResult.data.data,
-        data: { ...jsonResult.data.data.data, pages: url.get("page") },
-      },
-    };
-  } else {
-    return { status: false, data: {} };
-  }
+  return unpackedToken
 };
