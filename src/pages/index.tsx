@@ -2,7 +2,7 @@ import { TUCMC } from "@/components/logo/TUCMC"
 
 const Index = () => {
   return (
-    <div className="font-plus-jakarta-sans flex min-h-screen w-full flex-col justify-center bg-malt-200">
+    <div className="font-plus-jakarta-sans relative flex min-h-screen w-full flex-col justify-center bg-malt-200">
       <div className="flex w-full flex-col items-center justify-center px-6">
         <div className="max-w-[342px] sm:ml-14 sm:max-w-[unset] md:ml-24">
           <div className="mx-auto">
@@ -35,7 +35,7 @@ const Index = () => {
           </div>
         </div>
       </div>
-      <div className="fixed bottom-0 mb-[66px] flex w-full items-center justify-center">
+      <div className="absolute bottom-0 mb-[66px] flex w-full items-center justify-center">
         <TUCMC className="w-[132px] text-lapis-600 sm:w-[195px]" />
       </div>
     </div>
