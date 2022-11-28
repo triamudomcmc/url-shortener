@@ -17,6 +17,7 @@ module.exports = {
     extend: {
       colors: {
         malt: {
+          100: "#FEF8F2",
           200: "#F9F3ED"
         },
         lapis: {
