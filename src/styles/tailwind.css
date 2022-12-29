@@ -3,53 +3,80 @@
 @tailwind utilities;
 
 @layer utilities {
-	.complex-gradient {
-		background: linear-gradient(189.55deg, #ff7b7b 3.68%, rgba(201, 91, 157, 0) 78.81%),
-			linear-gradient(98.47deg, #749bff 0%, #95ffec 90.1%);
-	}
-	.mid-complex-gradient {
-		background: linear-gradient(115.85deg, #e0bcf3 31.65%, #7ee7ee 94.47%);
-	}
-	.glass-input {
-		background: linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%),
-			rgba(255, 255, 255, 0.2);
-		backdrop-filter: blur(4px);
-		border: 2px solid #aaa;
-	}
-	.glass-panel {
-		background: linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%),
-			rgba(255, 255, 255, 0.2);
-		backdrop-filter: blur(4px);
-		box-shadow: #ffffff 0px -1px 0px 1px;
-	}
-	.content-panel {
-		background: linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%),
-			rgba(255, 255, 255, 0.2);
-		backdrop-filter: blur(4px);
-		box-shadow: #ffffff 0px -1px 0px 1px;
-	}
-	.overflow-custom {
-		overflow-x: hidden;
-		overflow-y: scroll;
-		scrollbar-width: none; /* Firefox */
-		-ms-overflow-style: none; /* Internet Explorer 10+ */
-		height: 100%;
-		-webkit-overflow-scrolling: touch;
-	}
-	.overflow-custom::-webkit-scrollbar {
-		/* WebKit */
-		width: 0;
-		height: 0;
-	}
-	.custom-min-h {
-		min-height: 100%;
-	}
-	@responsive {
-		.custom-max-h {
-			max-height: 100%;
-		}
-		.custom-max-w {
-			max-width: 235px;
-		}
-	}
+  .complex-gradient {
+    background: linear-gradient(
+        189.55deg,
+        #ff7b7b 3.68%,
+        rgba(201, 91, 157, 0) 78.81%
+      ),
+      linear-gradient(98.47deg, #749bff 0%, #95ffec 90.1%);
+  }
+  .mid-complex-gradient {
+    background: linear-gradient(115.85deg, #e0bcf3 31.65%, #7ee7ee 94.47%);
+  }
+  .oph-gradient {
+    background: linear-gradient(
+      180deg,
+      #ec9e6d -1.95%,
+      #9095c5 73.59%,
+      #6571d9 112.67%
+    );
+  }
+  .glass-input {
+    background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.1) 0%,
+        rgba(255, 255, 255, 0) 100%
+      ),
+      rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(4px);
+    border: 2px solid #aaa;
+  }
+  .glass-panel {
+    background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.1) 0%,
+        rgba(255, 255, 255, 0) 100%
+      ),
+      rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(4px);
+    box-shadow: #ffffff 0px -1px 0px 1px;
+  }
+  .content-panel {
+    background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.1) 0%,
+        rgba(255, 255, 255, 0) 100%
+      ),
+      rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(4px);
+    box-shadow: #ffffff 0px -1px 0px 1px;
+  }
+  .overflow-custom {
+    overflow-x: hidden;
+    overflow-y: scroll;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+    height: 100%;
+    -webkit-overflow-scrolling: touch;
+  }
+  .overflow-custom::-webkit-scrollbar {
+    /* WebKit */
+    width: 0;
+    height: 0;
+  }
+  .custom-min-h {
+    min-height: 100%;
+  }
+  @responsive {
+    .custom-max-h {
+      max-height: 100%;
+    }
+    .custom-max-w {
+      max-width: 235px;
+    }
+    .custom-max-w-oph {
+      max-width: 345px;
+    }
+  }
 }
