@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { GetStaticProps } from "next";
-import { request } from "../lib/request";
+import { request } from "../../lib/request";
 import { useRouter } from "next/router";
 import hash from "object-hash";
 import { PageLink } from "@components";
