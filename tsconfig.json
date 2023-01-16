@@ -3,7 +3,9 @@
     "baseUrl": ".",
     "target": "es5",
     "paths": {
-      "@components": ["src/components/index.ts"],
+      "@components": [
+        "src/components/index.ts"
+      ]
     },
     "lib": [
       "dom",
@@ -20,7 +22,8 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "incremental": true
   },
   "include": [
     "next-env.d.ts",

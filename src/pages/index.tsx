@@ -2,6 +2,15 @@ import React, { useEffect } from "react";
 import { InputForm } from "@components";
 import Head from "next/head";
 
+export async function getServerSideProps(context) {
+  return {
+    redirect: {
+      destination: 'https://beta.tucm.cc',
+      permanent: false,
+    },
+  }
+}
+
 const Index = () => {
   return (
     <>
