@@ -2,6 +2,7 @@ import "../styles/global.css"
 
 import { Antonio, Noto_Sans_Thai, Plus_Jakarta_Sans } from "@next/font/google"
 import type { AppProps } from "next/app"
+import { AuthProvider } from "tucmc-auth"
 
 const antonio = Antonio({ subsets: ["latin"] })
 const plusJakartaSans = Plus_Jakarta_Sans({ subsets: ["latin"] })
@@ -21,7 +22,9 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
           font-family: ${notoSansThai.style.fontFamily};
         }
       `}</style>
-      <Component {...pageProps} />
+      <AuthProvider TOKEN="xLsBlg9lr6d9IGIO18UxdvVwgHgwm1d9iR7ZVeEaoJeF">
+        <Component {...pageProps} />
+      </AuthProvider>
     </>
   )
 }
