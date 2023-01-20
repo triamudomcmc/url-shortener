@@ -5,6 +5,7 @@ import { useState } from "react"
 
 import { Copy } from "@/components/icons/Copy"
 import { Scissors } from "@/components/icons/Scissors"
+import { useToast } from "@/contexts/useToast"
 import { useUI } from "@/contexts/useUI"
 
 export const URLBox: FC<{
@@ -17,6 +18,7 @@ export const URLBox: FC<{
   const { variants } = useUI()
   const [isInvalid, setInvalid] = useState(false)
   const [isShaking, setShaking] = useState(false)
+  const { pushToast } = useToast()
 
   const shake = () => {
     setShaking(false)
@@ -32,6 +34,13 @@ export const URLBox: FC<{
         case "invalidURL":
           setInvalid(true)
           shake()
+          pushToast({
+            text: "Invalid URL",
+            lifeSpan: 2000,
+            options: {
+              bg: "bg-red-500"
+            }
+          })
           break
         default:
           break
@@ -55,7 +64,7 @@ export const URLBox: FC<{
       <input
         placeholder={"https://example.com"}
         className={classnames(
-          "w-full rounded-2xl border px-6 py-3.5 font-light shadow-md outline-none transition-colors delay-[10ms] sm:py-4 sm:text-xl",
+          "w-full rounded-2xl border py-3.5 pl-6 pr-12 font-light shadow-md outline-none transition-colors delay-[10ms] sm:py-4 sm:pr-16 sm:text-xl",
           variants.is("shortened")
             ? "border-malt-100 bg-lapis-600 text-malt-100 placeholder:text-malt-100"
             : "border-lapis-600 bg-malt-200 text-lapis-600 placeholder:text-lapis-600",
@@ -78,6 +87,8 @@ export const URLBox: FC<{
             key={variants.value}
             initial={{ rotate: -90 }}
             animate={{ rotate: 0 }}
+            whileHover={{ rotate: 5 }}
+            whileTap={{ rotate: -5 }}
           >
             <Copy
               onClick={onCopy}

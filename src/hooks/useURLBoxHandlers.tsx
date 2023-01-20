@@ -3,6 +3,7 @@ import { useState } from "react"
 import { useAuth } from "tucmc-auth"
 
 import { useShortener } from "@/contexts/shortener"
+import { useToast } from "@/contexts/useToast"
 import { useUI } from "@/contexts/useUI"
 import { generateUrlBridgeContext } from "@/handlers/init"
 
@@ -49,8 +50,23 @@ export const useURLBoxHandlers = () => {
   const { loggedUser } = useAuth()
   const { variants } = useUI()
   const [isLoading, setIsLoading] = useState(false)
+  const { pushToast } = useToast()
 
-  const onCopy = () => {}
+  const onCopy = async () => {
+    if ("clipboard" in navigator) {
+      await navigator.clipboard.writeText(url.value)
+    } else {
+      document.execCommand("copy", true, url.value)
+    }
+    pushToast({
+      text: "Copied",
+      lifeSpan: 2000,
+      options: {
+        bg: "bg-malt-100",
+        text: "text-lapis-600"
+      }
+    })
+  }
 
   const onSubmit = async (onError: (error: string) => void) => {
     if (!validateUrl(url.value)) {
