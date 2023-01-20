@@ -53,7 +53,7 @@ const useToastHook = (
   const [queue, setQueue] = useState<Toast[]>([])
 
   const pushToast = (toast: Toast) => {
-    setQueue((prev) => [toast, ...prev])
+    setQueue((prev) => [toast])
   }
 
   const runToast = (tqueue: Toast[]) => {
