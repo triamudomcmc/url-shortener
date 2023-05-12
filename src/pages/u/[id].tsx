@@ -90,7 +90,7 @@ const Link = () => {
           className="disabled object-cover"
         />
       </div>
-      <div className="my-auto flex flex-col py-8">
+      <div className="my-auto flex flex-col py-12">
         <div className="max-w-md rounded-3xl border border-[#333E51] bg-white bg-opacity-20 backdrop-blur">
           <div className="relative z-10 mx-auto mt-2 flex max-w-[340px] md:max-w-[380px]">
             <div className="item-center round-lg flex w-full flex-col rounded-3xl">

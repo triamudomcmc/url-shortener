@@ -358,7 +358,7 @@ const Edit = () => {
           </motion.div>
         </div>
       )}
-      <div className="my-auto flex flex-col py-8">
+      <div className="my-auto flex flex-col py-12">
         <motion.div
           animate={
             editing ? { scale: 0.1, opacity: 0 } : { scale: 1, opacity: 1 }
