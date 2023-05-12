@@ -92,7 +92,7 @@ const Link = () => {
       </div>
       <div className="my-auto flex flex-col py-12">
         <div className="max-w-md rounded-3xl border border-[#333E51] bg-white bg-opacity-20 backdrop-blur">
-          <div className="relative z-10 mx-auto mt-2 flex max-w-[340px] md:max-w-[380px]">
+          <div className="relative z-10 mx-auto mt-2 flex max-w-[348px] md:max-w-[380px]">
             <div className="item-center round-lg flex w-full flex-col rounded-3xl">
               <div className="mx-6 mt-8 flex h-full flex-col items-center">
                 <h1 className="font-oswald mt-3 text-center text-4xl font-extrabold text-[#333E51]">

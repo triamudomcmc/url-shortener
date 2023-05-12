@@ -2,7 +2,7 @@ import classnames from "classnames"
 import { motion } from "framer-motion"
 import Image from "next/image"
 import Router from "next/router"
-import { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { useAuth } from "tucmc-auth"
 
 const Page = () => {
@@ -48,13 +48,16 @@ const Page = () => {
 
   return (
     <div className="font-plus-jakarta-sans h-screen w-full px-4 py-16 text-[#333E51]">
-      <Image
-        src={"/assets/images/portal/abg2.jpg"}
-        alt=""
-        fill={true}
-        className="disabled"
-        objectFit="fill"
-      />
+      <div className="z-2 fixed top-0 left-0 h-[100vh] w-full">
+        <Image
+          src={"/assets/images/portal/abg2.jpg"}
+          alt=""
+          fill={true}
+          className="disabled"
+          priority={true}
+          objectFit="fill"
+        />
+      </div>
       <motion.div
         animate={
           loading

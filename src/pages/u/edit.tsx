@@ -364,7 +364,7 @@ const Edit = () => {
             editing ? { scale: 0.1, opacity: 0 } : { scale: 1, opacity: 1 }
           }
           transition={{ duration: 0.4 }}
-          className="max-w-[340px] rounded-3xl border border-[#333E51] bg-white bg-opacity-20 backdrop-blur md:max-w-[380px]"
+          className="max-w-[348px] rounded-3xl border border-[#333E51] bg-white bg-opacity-20 backdrop-blur md:max-w-[380px]"
         >
           <div className="item-center round-lg glass-panel flex w-full flex-col rounded-3xl">
             <div className="mx-6 mt-8 flex h-full flex-col items-center">
