@@ -8,7 +8,25 @@ class MyDocument extends Document {
   render() {
     return (
       <Html lang={AppConfig.locale}>
-        <Head />
+        <Head>
+          <link rel="stylesheet" href="https://use.typekit.net/cmb6fbq.css" />
+          <script
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=G-583M58GF2E"
+          ></script>
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+			  window.dataLayer = window.dataLayer || [];
+			  function gtag(){dataLayer.push(arguments);}
+			  gtag('js', new Date());
+			  gtag('config', 'G-583M58GF2E', {
+				page_path: window.location.pathname,
+			  });
+			`
+            }}
+          />
+        </Head>
         <body>
           <Main />
           <NextScript />

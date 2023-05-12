@@ -21,11 +21,15 @@
     "postbuild": "next-sitemap"
   },
   "dependencies": {
-    "@heroicons/react": "^2.0.13",
+    "@fingerprintjs/fingerprintjs": "^3.4.1",
+    "@heroicons/react": "^2.0.18",
     "@iconify/react": "^4.0.0",
     "@next/font": "^13.0.5",
     "@tailwindcss/line-clamp": "^0.4.2",
+    "@types/cookies": "^0.7.7",
+    "@types/object-hash": "^3.0.2",
     "classnames": "^2.3.2",
+    "cookies": "^0.8.0",
     "crypto-random-string": "^5.0.0",
     "dotenv": "^16.0.3",
     "firebase-admin": "^11.4.1",
@@ -34,6 +38,7 @@
     "next-bridge": "^0.0.1",
     "next-seo": "^5.14.1",
     "next-sitemap": "^3.1.32",
+    "object-hash": "^3.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "tucmc-auth": "^0.4.7"
