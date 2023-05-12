@@ -52,6 +52,7 @@ const Page = () => {
         src={"/assets/images/portal/abg2.jpg"}
         alt=""
         fill={true}
+        className="disabled"
         objectFit="fill"
       />
       <motion.div
@@ -161,7 +162,7 @@ const Page = () => {
           alt="bg"
           layout="fill"
           objectPosition="100% 0"
-          className={"object-cover"}
+          className={"disabled object-cover"}
         />
       </div>
     </div>

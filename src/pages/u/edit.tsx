@@ -227,20 +227,24 @@ const Edit = () => {
   }
 
   return (
-    <div className="mid-complex-gradient flex h-full min-h-screen w-full flex-col items-center">
-      <Image
-        src={"/assets/images/portal/abg2.jpg"}
-        alt=""
-        fill={true}
-        objectFit="fill"
-      />
+    <div className="flex h-full min-h-screen w-full flex-col items-center">
+      <div className="z-2 fixed top-0 left-0 h-[100vh] w-full">
+        <Image
+          src={"/assets/images/portal/abg2.jpg"}
+          alt=""
+          fill={true}
+          priority={true}
+          className="disabled"
+          objectFit="fill"
+        />
+      </div>
       <div className="z-2 fixed top-0 left-0 h-[100vh] w-[550px]">
         <Image
           priority={true}
           alt=""
           src={"/assets/images/a_side_left.png"}
           layout={"fill"}
-          className="object-cover"
+          className="disabled object-cover"
         />
       </div>
       <div className="z-2 fixed top-0 right-0 hidden h-[100vh] w-[500px] md:block">
@@ -249,7 +253,7 @@ const Edit = () => {
           priority={true}
           src={"/assets/images/a_side_right.png"}
           layout={"fill"}
-          className="object-cover"
+          className="disabled object-cover"
         />
       </div>
       {hide && (
@@ -354,7 +358,7 @@ const Edit = () => {
           </motion.div>
         </div>
       )}
-      <div className="my-auto flex flex-col">
+      <div className="my-auto flex flex-col py-8">
         <motion.div
           animate={
             editing ? { scale: 0.1, opacity: 0 } : { scale: 1, opacity: 1 }

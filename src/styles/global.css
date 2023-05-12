@@ -59,3 +59,19 @@ a:hover {
   animation-iteration-count: infinite;
   animation-timing-function: cubic-bezier(0.670, 0.15, 0.130, 0.785);
 }
+
+@supports (-webkit-touch-callout: none) {
+  .min-h-screen {
+    min-height: -webkit-fill-available;
+  }
+}
+
+.disabled {
+  pointer-events: none;
+  user-select: none;
+}
+
+.no-drag {
+  user-drag: none;
+  -webkit-user-drag: none;
+}

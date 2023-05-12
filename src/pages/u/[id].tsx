@@ -62,19 +62,23 @@ const Link = () => {
 
   return (
     <div className="flex h-full min-h-screen w-full flex-col items-center">
-      <Image
-        src={"/assets/images/portal/abg2.jpg"}
-        alt=""
-        fill={true}
-        objectFit="fill"
-      />
+      <div className="z-2 fixed top-0 left-0 h-[100vh] w-full">
+        <Image
+          src={"/assets/images/portal/abg2.jpg"}
+          alt=""
+          fill={true}
+          className="disabled"
+          priority={true}
+          objectFit="fill"
+        />
+      </div>
       <div className="z-2 fixed top-0 left-0 h-[100vh] w-[550px]">
         <Image
           priority={true}
           alt=""
           src={"/assets/images/a_side_left.png"}
           layout={"fill"}
-          className="object-cover"
+          className="disabled object-cover"
         />
       </div>
       <div className="z-2 fixed top-0 right-0 hidden h-[100vh] w-[500px] md:block">
@@ -83,10 +87,10 @@ const Link = () => {
           priority={true}
           src={"/assets/images/a_side_right.png"}
           layout={"fill"}
-          className="object-cover"
+          className="disabled object-cover"
         />
       </div>
-      <div className="my-auto flex flex-col">
+      <div className="my-auto flex flex-col py-8">
         <div className="max-w-md rounded-3xl border border-[#333E51] bg-white bg-opacity-20 backdrop-blur">
           <div className="relative z-10 mx-auto mt-2 flex max-w-[340px] md:max-w-[380px]">
             <div className="item-center round-lg flex w-full flex-col rounded-3xl">
@@ -114,7 +118,7 @@ const Link = () => {
           </div>
         </div>
         <div className="z-20 mx-auto mt-12">
-          <TUCMC className="w-[184px] text-[#333E51]" />
+          <TUCMC className="disabled w-[184px] text-[#333E51]" />
         </div>
       </div>
     </div>
