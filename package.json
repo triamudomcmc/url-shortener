@@ -2,7 +2,7 @@
   "name": "url-shortener",
   "version": "0.0.1",
   "scripts": {
-    "dev": "doppler run next dev",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "build-stats": "cross-env ANALYZE=true npm run build",

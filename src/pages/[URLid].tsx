@@ -5,8 +5,6 @@ import React, { useEffect } from "react"
 
 import { getFirestore } from "@/lib/firebase-admin"
 
-// trash
-
 export const getStaticPaths: GetStaticPaths = async () => {
   return { paths: [], fallback: true }
 }
@@ -31,7 +29,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   return {
     props: { target: URLtarget, title: URLbase.get("title") || null },
-    revalidate: URLtarget === "error" ? 1 : 2 * 60 * 60
+    revalidate: 30
   }
 }
 
